@@ -30,8 +30,6 @@ struct L {
 
     // Tabs
     var hotkeys: String { lang == .zh ? "快捷键" : "Hotkeys" }
-    var dictionary: String { lang == .zh ? "词汇表" : "Dictionary" }
-    var history: String { lang == .zh ? "历史记录" : "History" }
     var api: String { "API" }
     var test: String { lang == .zh ? "测试" : "Test" }
 
@@ -43,8 +41,8 @@ struct L {
     var granted: String { lang == .zh ? "已授权" : "Granted" }
     var accessibilityHint: String {
         lang == .zh
-            ? "如果重编译后权限反复失效，请先配置稳定的本地签名。README 里有具体说明。"
-            : "If permission keeps resetting after rebuilds, configure stable local signing first. See README."
+            ? "授权后如未生效，请在系统设置中删除旧条目后重新授权。"
+            : "After granting, remove the old entry and re-add via Grant Access."
     }
 
     // Hotkey
@@ -90,16 +88,12 @@ struct L {
 
 enum SettingsTab: String, CaseIterable {
     case hotkeys
-    case dictionary
-    case history
     case api
     case test
 
     func label(_ l: L) -> String {
         switch self {
         case .hotkeys: return l.hotkeys
-        case .dictionary: return l.dictionary
-        case .history: return l.history
         case .api: return l.api
         case .test: return l.test
         }
@@ -148,10 +142,6 @@ struct MainWindowView: View {
             case .hotkeys:
                 HotkeysTabView(hotkeyManager: hotkeyManager, l: l)
                     .environmentObject(permissionManager)
-            case .dictionary:
-                DictionaryTabView(l: l)
-            case .history:
-                HistoryTabView(l: l)
             case .api:
                 APITabView(l: l)
             case .test:
@@ -160,7 +150,7 @@ struct MainWindowView: View {
                     .environmentObject(coordinator)
             }
         }
-        .frame(width: 640, height: 500)
+        .frame(width: 560, height: 420)
         .onAppear {
             permissionManager.checkAll()
         }
@@ -169,8 +159,6 @@ struct MainWindowView: View {
     private func tabIcon(_ tab: SettingsTab) -> String {
         switch tab {
         case .hotkeys: return "keyboard"
-        case .dictionary: return "text.book.closed"
-        case .history: return "clock.arrow.circlepath"
         case .api: return "key"
         case .test: return "mic"
         }
@@ -303,6 +291,7 @@ struct APITabView: View {
     @State private var customHost: String = ""
     @State private var customBasePath: String = ""
     @State private var selectedModel: String = "gpt-4o-mini-transcribe"
+    @State private var localModel: String = "base"
     @State private var saveStatus: String?
 
     var body: some View {
@@ -317,24 +306,17 @@ struct APITabView: View {
                     .pickerStyle(.segmented)
 
                     if provider == .custom {
-                        TextField("Host (e.g. space.ai-builders.com)", text: $customHost)
+                        TextField("Host (e.g. http://localhost:8080)", text: $customHost)
                             .textFieldStyle(.roundedBorder)
-                        TextField("Base Path (e.g. /backend/v1)", text: $customBasePath)
+                        TextField("Base Path (e.g. /v1)", text: $customBasePath)
                             .textFieldStyle(.roundedBorder)
                         Text(l.customHint)
                             .font(.caption2)
                             .foregroundStyle(.secondary)
                     }
-                }
-                .padding(8)
-            }
 
-            GroupBox(l.apiKey) {
-                VStack(alignment: .leading, spacing: 4) {
-                    SecureField(l.apiKey, text: $apiKey)
-                        .textFieldStyle(.roundedBorder)
-                    if !TranscriptionService.apiKey.isEmpty && apiKey.isEmpty {
-                        Text("API key is saved. Enter a new one to replace it.")
+                    if provider == .local {
+                        Text("使用本机已安装的 Whisper 模型，无需 API Key 和网络连接。")
                             .font(.caption2)
                             .foregroundStyle(.secondary)
                     }
@@ -342,14 +324,40 @@ struct APITabView: View {
                 .padding(8)
             }
 
-            GroupBox(l.model) {
-                Picker(l.model, selection: $selectedModel) {
-                    Text("gpt-4o-mini-transcribe ($0.003/min)").tag("gpt-4o-mini-transcribe")
-                    Text("gpt-4o-transcribe ($0.006/min)").tag("gpt-4o-transcribe")
-                    Text("whisper-1 ($0.006/min)").tag("whisper-1")
+            if provider != .local {
+                GroupBox(l.apiKey) {
+                    VStack(alignment: .leading, spacing: 4) {
+                        SecureField(l.apiKey, text: $apiKey)
+                            .textFieldStyle(.roundedBorder)
+                        if !TranscriptionService.apiKey.isEmpty && apiKey.isEmpty {
+                            Text("API key is saved. Enter a new one to replace it.")
+                                .font(.caption2)
+                                .foregroundStyle(.secondary)
+                        }
+                    }
+                    .padding(8)
                 }
-                .pickerStyle(.menu)
-                .padding(8)
+            }
+
+            GroupBox(l.model) {
+                if provider == .local {
+                    Picker(l.model, selection: $localModel) {
+                        Text("base（快速，139MB）").tag("base")
+                        Text("medium（精准，1.4GB）").tag("medium")
+                        Text("small（均衡，244MB）").tag("small")
+                        Text("large（最准，2.9GB）").tag("large")
+                    }
+                    .pickerStyle(.menu)
+                    .padding(8)
+                } else {
+                    Picker(l.model, selection: $selectedModel) {
+                        Text("gpt-4o-mini-transcribe ($0.003/min)").tag("gpt-4o-mini-transcribe")
+                        Text("gpt-4o-transcribe ($0.006/min)").tag("gpt-4o-transcribe")
+                        Text("whisper-1 ($0.006/min)").tag("whisper-1")
+                    }
+                    .pickerStyle(.menu)
+                    .padding(8)
+                }
             }
 
             HStack {
@@ -368,12 +376,12 @@ struct APITabView: View {
     }
 
     private func load() {
-        // Only load key from UserDefaults, not env var (avoid persisting env secrets)
         apiKey = UserDefaults.standard.string(forKey: "apiKey") ?? ""
         provider = TranscriptionService.provider
         customHost = TranscriptionService.customHost
         customBasePath = TranscriptionService.customBasePath
         selectedModel = UserDefaults.standard.string(forKey: "transcriptionModel") ?? TranscriptionService.model
+        localModel = TranscriptionService.localModel
 
         if let stored = UserDefaults.standard.string(forKey: "apiProvider"),
            let p = APIProvider(rawValue: stored) { provider = p }
@@ -387,6 +395,9 @@ struct APITabView: View {
         if provider == .custom {
             if !customHost.isEmpty { TranscriptionService.customHost = customHost }
             if !customBasePath.isEmpty { TranscriptionService.customBasePath = customBasePath }
+        }
+        if provider == .local {
+            TranscriptionService.localModel = localModel
         }
         TranscriptionService.model = selectedModel
         UserDefaults.standard.set(provider.rawValue, forKey: "apiProvider")
