@@ -1,4 +1,5 @@
 import Foundation
+import AppKit
 
 @MainActor
 final class DictationSessionCoordinator: ObservableObject {
@@ -6,6 +7,7 @@ final class DictationSessionCoordinator: ObservableObject {
     let transcriptionService = TranscriptionService()
     private let popupController = ResultPopupController()
     private let overlay = ProgressOverlayController.shared
+    private let coachingService = CoachingService()
     private var outputSnapshot: OutputTargetSnapshot?
     private var lastToggleTime: Date?
     private let doubleTapThreshold: TimeInterval = 0.4
@@ -127,6 +129,12 @@ final class DictationSessionCoordinator: ObservableObject {
             break
         case .showPopup(let text):
             popupController.show(text: text)
+        }
+
+        let sessionApp = NSWorkspace.shared.frontmostApplication?.localizedName ?? "Unknown"
+        Task.detached(priority: .background) {
+            [coachingService, transcribedText, sessionApp] in
+            await coachingService.analyze(transcribedText, sessionApp: sessionApp)
         }
 
         appState.status = .idle
