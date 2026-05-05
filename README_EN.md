@@ -2,19 +2,21 @@
 
 [中文](README.md) | [English](README_EN.md)
 
-People who use Claude seriously tend to switch to English — and for good reason.
+## Two Problems, One Solution
 
-The quality gap between English and Chinese prompts is real: sharper reasoning, better detail, deeper answers. So many users make the deliberate switch. But then a new problem surfaces: their spoken English isn't fluent enough to keep up. The words are there, the phrasing is off.
+**Problem 1: English prompts get better results from Claude, but spoken English is hard to keep up with.**
 
-The second problem: waiting.
+Claude's training data is predominantly English, which directly affects output quality across languages. For the same question, an English prompt consistently produces more precise reasoning, more complete details, and sharper phrasing compared to Chinese. This is a consistent observation from long-term users, not just perception. Many people have started deliberately switching to English when working with Claude — but a new problem appears: their spoken English isn't fluent enough to keep up. The intent is there; the expression isn't.
 
-When working with Claude, waiting is constant. You send a prompt, then wait — 10 seconds, 30 seconds, sometimes longer. Too short to start something new, too long to just do nothing.
+**Problem 2: The waiting time has no good use.**
+
+When working with Claude, waiting is constant. You send a prompt, then wait — 10 seconds, 30 seconds, sometimes longer. Too short to open something new, too long to just do nothing.
 
 **Best Waiting** turns both problems into one solution: practice speaking English during the wait.
 
 ## The Solution
 
-Press a hotkey, say something in English — whatever you just sent to Claude, your thoughts on the task, anything. Press again to stop. Your speech is transcribed and inserted into the current text field.
+Press a hotkey, say something in English — whatever you just sent to Claude, your thoughts on the task, anything. Press again to stop. Your speech is transcribed locally by Whisper and inserted into the current text field.
 
 Meanwhile, **Ghost Coach** quietly records every sentence you speak, analyzes it for Chinglish patterns, collocation errors, and unnatural phrasing, then writes the results to a log.
 
@@ -91,11 +93,19 @@ On first launch, grant:
 - **Microphone** — for recording
 - **Accessibility** — for the global hotkey and text insertion
 
-### 3. Configure Transcription API
+### 3. Start the Local Transcription Server
 
-Click the menu bar icon → **Settings** → **API** tab, enter your OpenAI API key.
+Transcription runs locally using [OpenAI Whisper](https://github.com/openai/whisper) — fully offline, no API key required.
 
-Get one at [platform.openai.com/api-keys](https://platform.openai.com/api-keys).
+```bash
+# Install dependencies
+pip install openai-whisper
+
+# Start the local transcription server (keep the terminal running)
+python3 whisper_server.py
+```
+
+On first run, Whisper will automatically download the `base` model (~140 MB). Once ready, the server runs at `http://localhost:5001` and the app connects automatically.
 
 ### 4. Configure Ghost Coach
 
@@ -120,12 +130,7 @@ The hotkey can be customized in Settings → Hotkeys tab.
 
 ## Pricing
 
-Transcription uses `gpt-4o-mini-transcribe` by default ($0.003/min). Ghost Coach analysis uses Kimi's `kimi-for-coding` model, which requires a Kimi account and is currently free.
-
-| Usage | Transcription cost (USD) |
-|-------|--------------------------|
-| 1 minute | $0.003 |
-| 30 min/day, 1 month | ~$2.70 |
+Transcription uses a local Whisper model. Ghost Coach analysis uses a Kimi account. Both are completely free.
 
 ## License
 
