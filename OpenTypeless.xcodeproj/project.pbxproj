@@ -7,7 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0066334063CA159D15033A23 /* CoachingServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 164C69724F475123B0B3DDEF /* CoachingServiceTests.swift */; };
 		1EB4A09EEB065D74C39AF6B6 /* MainWindowView.swift in Sources */ = {isa = PBXBuildFile; fileRef = ABF05C3D3B209C89B1E47474 /* MainWindowView.swift */; };
+		211014036DC11B8DB9A18975 /* LocalWhisperTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 481FB23011258C7009D19D9B /* LocalWhisperTests.swift */; };
 		23C9BE378271EDE9D5777E73 /* DictationSessionCoordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6BD7AD980E1C1D73673DDC9D /* DictationSessionCoordinator.swift */; };
 		25BB5D470A6903D0352B9A9F /* PermissionManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5C5E0B7101FE0F65E18809B0 /* PermissionManager.swift */; };
 		4B3F06060B84DD2A4FCCEED7 /* MenuBarView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 90E7D04CF7BDDDFA6CCD6F6C /* MenuBarView.swift */; };
@@ -25,11 +27,13 @@
 		90351E10B9B500391B07A372 /* OpenAI in Frameworks */ = {isa = PBXBuildFile; productRef = B48718C9952536A0E084CEED /* OpenAI */; };
 		98FB88EC56F3A9EEE30D404F /* HotkeyManagerTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2D22EB1E3CFB846C07918331 /* HotkeyManagerTests.swift */; };
 		B254BF91918A26ADEEB2EFA1 /* TranscriptionServiceTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8D43E926297E99334837F80E /* TranscriptionServiceTests.swift */; };
+		B874F4DA049EA1E02887ADCD /* CoachingService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6F5D484BB2AA2ED987162467 /* CoachingService.swift */; };
 		BD38E6757E075D57D51EC9C7 /* AudioRecorderTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6A8F4EC1F9358BA1BD30539E /* AudioRecorderTests.swift */; };
 		C1FC9BE139524CF518FE6342 /* AudioRecorder.swift in Sources */ = {isa = PBXBuildFile; fileRef = 421E15634FC1D9BC346350AC /* AudioRecorder.swift */; };
 		C66AD81E2764765174F65B24 /* ProgressOverlay.swift in Sources */ = {isa = PBXBuildFile; fileRef = BCC095ED5BE2645B195A6F3A /* ProgressOverlay.swift */; };
 		CBC03266564DC19E434EB661 /* ShortcutRecorderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 77D153D1A5BE9EDF7A543A36 /* ShortcutRecorderView.swift */; };
 		D093CA63AF7678BE2B1CFC58 /* HotkeyStoreTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = D7DB340E5942201AEF2DC10E /* HotkeyStoreTests.swift */; };
+		DB01A1A61C1C5A59C7E38F75 /* CoachingLogWriterTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0F137E21AB64CCB7B3BCA3CF /* CoachingLogWriterTests.swift */; };
 		EE1A1F5A677EB5D0B84B5F71 /* DictationSessionCoordinatorTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 8A55BB38F0DED7BB7F55BDFB /* DictationSessionCoordinatorTests.swift */; };
 		F020B687087957DDF840D7B0 /* TranscriptionService.swift in Sources */ = {isa = PBXBuildFile; fileRef = FF248BD2A796C8D341245E2D /* TranscriptionService.swift */; };
 		FB0374BC4E42085DFCA75A72 /* InsertionStrategyTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 796F4D210BFE2C15DDE783BD /* InsertionStrategyTests.swift */; };
@@ -47,6 +51,8 @@
 
 /* Begin PBXFileReference section */
 		0C152EF9B6F66F7308D0ECDA /* OpenTypeless.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = OpenTypeless.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		0F137E21AB64CCB7B3BCA3CF /* CoachingLogWriterTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoachingLogWriterTests.swift; sourceTree = "<group>"; };
+		164C69724F475123B0B3DDEF /* CoachingServiceTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoachingServiceTests.swift; sourceTree = "<group>"; };
 		24381B8AF2275F9837C6D2B0 /* HotkeyStore.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotkeyStore.swift; sourceTree = "<group>"; };
 		256653591444C73EF7452E93 /* OutputTargetSnapshot.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = OutputTargetSnapshot.swift; sourceTree = "<group>"; };
 		26793EC7ECE0C478A178ECC9 /* AppStateTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppStateTests.swift; sourceTree = "<group>"; };
@@ -54,12 +60,14 @@
 		2FEBDAF7F11D5286DA0B26D8 /* OpenTypelessTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = OpenTypelessTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
 		38D7A142FE57E8DC4A27DE2F /* InsertionStrategy.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsertionStrategy.swift; sourceTree = "<group>"; };
 		421E15634FC1D9BC346350AC /* AudioRecorder.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorder.swift; sourceTree = "<group>"; };
+		481FB23011258C7009D19D9B /* LocalWhisperTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LocalWhisperTests.swift; sourceTree = "<group>"; };
 		52862BA91FB4BCD7E1BD2173 /* HotkeyManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotkeyManager.swift; sourceTree = "<group>"; };
 		5796BD42C96BBC050ECA210A /* App.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = App.swift; sourceTree = "<group>"; };
 		5C5E0B7101FE0F65E18809B0 /* PermissionManager.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PermissionManager.swift; sourceTree = "<group>"; };
 		62DDFAF0114BF7FD01DB87E3 /* AccessibilityHelper.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AccessibilityHelper.swift; sourceTree = "<group>"; };
 		6A8F4EC1F9358BA1BD30539E /* AudioRecorderTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AudioRecorderTests.swift; sourceTree = "<group>"; };
 		6BD7AD980E1C1D73673DDC9D /* DictationSessionCoordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DictationSessionCoordinator.swift; sourceTree = "<group>"; };
+		6F5D484BB2AA2ED987162467 /* CoachingService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoachingService.swift; sourceTree = "<group>"; };
 		77D153D1A5BE9EDF7A543A36 /* ShortcutRecorderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ShortcutRecorderView.swift; sourceTree = "<group>"; };
 		796F4D210BFE2C15DDE783BD /* InsertionStrategyTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = InsertionStrategyTests.swift; sourceTree = "<group>"; };
 		88CF2BA890D9F26B32824AF5 /* AppState.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppState.swift; sourceTree = "<group>"; };
@@ -128,7 +136,6 @@
 				3D4DCA23DD0C64A7A92DB47C /* Insertion */,
 				5F668D223D1DA89A0DF5399C /* Services */,
 				8802DBA662B7924F1FB9FC91 /* UI */,
-				62A0131A500D2576F3400CAB /* Utils */,
 			);
 			name = OpenTypeless;
 			path = Sources/OpenTypeless;
@@ -137,16 +144,10 @@
 		5F668D223D1DA89A0DF5399C /* Services */ = {
 			isa = PBXGroup;
 			children = (
+				6F5D484BB2AA2ED987162467 /* CoachingService.swift */,
 				FF248BD2A796C8D341245E2D /* TranscriptionService.swift */,
 			);
 			path = Services;
-			sourceTree = "<group>";
-		};
-		62A0131A500D2576F3400CAB /* Utils */ = {
-			isa = PBXGroup;
-			children = (
-			);
-			path = Utils;
 			sourceTree = "<group>";
 		};
 		642BEB9FE16FE9C27CFEE7DD /* Input */ = {
@@ -173,10 +174,13 @@
 			children = (
 				26793EC7ECE0C478A178ECC9 /* AppStateTests.swift */,
 				6A8F4EC1F9358BA1BD30539E /* AudioRecorderTests.swift */,
+				0F137E21AB64CCB7B3BCA3CF /* CoachingLogWriterTests.swift */,
+				164C69724F475123B0B3DDEF /* CoachingServiceTests.swift */,
 				8A55BB38F0DED7BB7F55BDFB /* DictationSessionCoordinatorTests.swift */,
 				2D22EB1E3CFB846C07918331 /* HotkeyManagerTests.swift */,
 				D7DB340E5942201AEF2DC10E /* HotkeyStoreTests.swift */,
 				796F4D210BFE2C15DDE783BD /* InsertionStrategyTests.swift */,
+				481FB23011258C7009D19D9B /* LocalWhisperTests.swift */,
 				8D43E926297E99334837F80E /* TranscriptionServiceTests.swift */,
 			);
 			name = OpenTypelessTests;
@@ -271,6 +275,11 @@
 			attributes = {
 				BuildIndependentTargetsInParallel = YES;
 				LastUpgradeCheck = 1600;
+				TargetAttributes = {
+					E44F30B67638619AD2BBB0E9 = {
+						ProvisioningStyle = Automatic;
+					};
+				};
 			};
 			buildConfigurationList = 5D102BF8A003B29790D797B4 /* Build configuration list for PBXProject "OpenTypeless" */;
 			developmentRegion = en;
@@ -315,6 +324,7 @@
 				8DE2A20EED78C691538082B9 /* App.swift in Sources */,
 				806FBDDDFA226D57DB8F3C39 /* AppState.swift in Sources */,
 				C1FC9BE139524CF518FE6342 /* AudioRecorder.swift in Sources */,
+				B874F4DA049EA1E02887ADCD /* CoachingService.swift in Sources */,
 				23C9BE378271EDE9D5777E73 /* DictationSessionCoordinator.swift in Sources */,
 				6C43A236DF88A49489ACAF46 /* HotkeyManager.swift in Sources */,
 				8B0CD5687619D8B38D365E95 /* HotkeyStore.swift in Sources */,
@@ -337,10 +347,13 @@
 			files = (
 				63F1EC05016B5CA650518390 /* AppStateTests.swift in Sources */,
 				BD38E6757E075D57D51EC9C7 /* AudioRecorderTests.swift in Sources */,
+				DB01A1A61C1C5A59C7E38F75 /* CoachingLogWriterTests.swift in Sources */,
+				0066334063CA159D15033A23 /* CoachingServiceTests.swift in Sources */,
 				EE1A1F5A677EB5D0B84B5F71 /* DictationSessionCoordinatorTests.swift in Sources */,
 				98FB88EC56F3A9EEE30D404F /* HotkeyManagerTests.swift in Sources */,
 				D093CA63AF7678BE2B1CFC58 /* HotkeyStoreTests.swift in Sources */,
 				FB0374BC4E42085DFCA75A72 /* InsertionStrategyTests.swift in Sources */,
+				211014036DC11B8DB9A18975 /* LocalWhisperTests.swift in Sources */,
 				B254BF91918A26ADEEB2EFA1 /* TranscriptionServiceTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -373,7 +386,6 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.scinttt.open-typeless";
 				PRODUCT_NAME = OpenTypeless;
-				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
 			};
 			name = Debug;
@@ -475,7 +487,6 @@
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.scinttt.open-typeless";
 				PRODUCT_NAME = OpenTypeless;
-				PROVISIONING_PROFILE_SPECIFIER = "";
 				SDKROOT = macosx;
 			};
 			name = Release;

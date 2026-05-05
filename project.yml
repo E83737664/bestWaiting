@@ -40,6 +40,8 @@ targets:
         PRODUCT_NAME: OpenTypeless
         ENABLE_HARDENED_RUNTIME: true
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
+        CODE_SIGN_IDENTITY: "Apple Development"
+        CODE_SIGN_STYLE: Automatic
         LD_RUNPATH_SEARCH_PATHS:
           - $(inherited)
           - "@executable_path/../Frameworks"
