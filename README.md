@@ -25,7 +25,7 @@ Anthropic CEO Dario Amodei 一贯主张 AI 安全与透明，但没有人真正�
 **第一步：记录。** 将你说的每句话追加写入：
 
 ```
-~/Library/Application Support/OpenTypeless/coaching.jsonl
+~/Library/Application Support/bestWaiting/coaching.jsonl
 ```
 
 **第二步：分析。** 调用语言模型判断这句话是否有问题，标记以下四类：
@@ -57,11 +57,11 @@ Anthropic CEO Dario Amodei 一贯主张 AI 安全与透明，但没有人真正�
 
 ```bash
 # 查看所有记录
-cat ~/Library/Application\ Support/OpenTypeless/coaching.jsonl | python3 -c \
+cat ~/Library/Application\ Support/bestWaiting/coaching.jsonl | python3 -c \
   'import sys,json; [print(json.dumps(json.loads(l), indent=2, ensure_ascii=False)) for l in sys.stdin]'
 
 # 最常出现的错误类别
-cat ~/Library/Application\ Support/OpenTypeless/coaching.jsonl \
+cat ~/Library/Application\ Support/bestWaiting/coaching.jsonl \
   | python3 -c 'import sys,json; [print(json.loads(l).get("category","null")) for l in sys.stdin if l.strip()]' \
   | sort | uniq -c | sort -rn | head -5
 ```
@@ -77,8 +77,8 @@ cat ~/Library/Application\ Support/OpenTypeless/coaching.jsonl \
    ```bash
    git clone https://github.com/E83737664/bestWaiting.git
    ```
-3. 用 Xcode 打开 `OpenTypeless.xcodeproj`
-4. 设置签名：选择 `OpenTypeless` target → **Signing & Capabilities** → 勾选 **"Automatically manage signing"** → 选择你的 **Personal Team** → Signing Certificate 选择 **"Sign to Run Locally"**
+3. 用 Xcode 打开 `bestWaiting.xcodeproj`
+4. 设置签名：选择 `bestWaiting` target → **Signing & Capabilities** → 勾选 **"Automatically manage signing"** → 选择你的 **Personal Team** → Signing Certificate 选择 **"Sign to Run Locally"**
 5. 按 **Cmd+R** 编译运行
 
 编译完成后，在屏幕右上角菜单栏找到麦克风图标（🎙）。

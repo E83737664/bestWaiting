@@ -25,7 +25,7 @@ Every time you use voice input, Ghost Coach does two things:
 **Step 1: Log.** Appends every utterance to:
 
 ```
-~/Library/Application Support/OpenTypeless/coaching.jsonl
+~/Library/Application Support/bestWaiting/coaching.jsonl
 ```
 
 **Step 2: Analyze.** Sends the utterance to a language model that flags four issue types:
@@ -57,11 +57,11 @@ Minor grammar mistakes (missing articles, tense issues) are intentionally ignore
 
 ```bash
 # All entries
-cat ~/Library/Application\ Support/OpenTypeless/coaching.jsonl | python3 -c \
+cat ~/Library/Application\ Support/bestWaiting/coaching.jsonl | python3 -c \
   'import sys,json; [print(json.dumps(json.loads(l), indent=2, ensure_ascii=False)) for l in sys.stdin]'
 
 # Top recurring error categories
-cat ~/Library/Application\ Support/OpenTypeless/coaching.jsonl \
+cat ~/Library/Application\ Support/bestWaiting/coaching.jsonl \
   | python3 -c 'import sys,json; [print(json.loads(l).get("category","null")) for l in sys.stdin if l.strip()]' \
   | sort | uniq -c | sort -rn | head -5
 ```
@@ -77,8 +77,8 @@ Utterances shorter than 5 words, non-English text, and rapid repeated dictations
    ```bash
    git clone https://github.com/E83737664/bestWaiting.git
    ```
-3. Open `OpenTypeless.xcodeproj` in Xcode
-4. Set up signing: Select the `OpenTypeless` target → **Signing & Capabilities** → Check **"Automatically manage signing"** → Select your **Personal Team** → Set Signing Certificate to **"Sign to Run Locally"**
+3. Open `bestWaiting.xcodeproj` in Xcode
+4. Set up signing: Select the `bestWaiting` target → **Signing & Capabilities** → Check **"Automatically manage signing"** → Select your **Personal Team** → Set Signing Certificate to **"Sign to Run Locally"**
 5. Press **Cmd+R** to build and run
 
 After building, look for the microphone icon (🎙) in the top-right menu bar.

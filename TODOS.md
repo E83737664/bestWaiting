@@ -15,7 +15,7 @@
 **Why:** After a month of dictation, the log becomes genuinely personalized — not generic advice but your specific recurring patterns (e.g., "you say 'discuss about' 4 times a week").
 **Context:** Quick MVP:
 ```sh
-cat ~/Library/Application\ Support/OpenTypeless/coaching.jsonl \
+cat ~/Library/Application\ Support/bestWaiting/coaching.jsonl \
   | python3 -c 'import sys,json; [print(json.loads(l).get("category","null")) for l in sys.stdin if l.strip()]' \
   | sort | uniq -c | sort -rn | head -5
 ```
