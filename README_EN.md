@@ -2,15 +2,15 @@
 
 [中文](README.md) | [English](README_EN.md)
 
-How much time do you spend waiting for Claude every day?
+People who use Claude seriously tend to switch to English — and for good reason.
 
-10 seconds, 30 seconds, sometimes longer. Most people just stare at the progress bar. **Best Waiting** turns that time into English practice.
+The quality gap between English and Chinese prompts is real: sharper reasoning, better detail, deeper answers. So many users make the deliberate switch. But then a new problem surfaces: their spoken English isn't fluent enough to keep up. The words are there, the phrasing is off.
 
-## The Problem
+The second problem: waiting.
 
-When working with Claude, waiting is constant. You send a prompt, then wait. The gap is too short to start something new, too long to just do nothing.
+When working with Claude, waiting is constant. You send a prompt, then wait — 10 seconds, 30 seconds, sometimes longer. Too short to start something new, too long to just do nothing.
 
-This project's answer: practice speaking English.
+**Best Waiting** turns both problems into one solution: practice speaking English during the wait.
 
 ## The Solution
 
