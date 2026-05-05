@@ -28,7 +28,7 @@ targets:
     info:
       path: Sources/OpenTypeless/Info.plist
       properties:
-        NSMicrophoneUsageDescription: "OpenTypeless needs microphone access to record your voice for speech-to-text transcription."
+        NSMicrophoneUsageDescription: "bestWaiting needs microphone access to record your voice for speech-to-text transcription."
         LSUIElement: true
     entitlements:
       path: Sources/OpenTypeless/OpenTypeless.entitlements
@@ -37,7 +37,7 @@ targets:
     settings:
       base:
         PRODUCT_BUNDLE_IDENTIFIER: com.scinttt.open-typeless
-        PRODUCT_NAME: OpenTypeless
+        PRODUCT_NAME: bestWaiting
         ENABLE_HARDENED_RUNTIME: true
         ASSETCATALOG_COMPILER_APPICON_NAME: AppIcon
         CODE_SIGN_IDENTITY: "Apple Development"

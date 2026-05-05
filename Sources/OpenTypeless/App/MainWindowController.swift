@@ -26,7 +26,7 @@ final class MainWindowController {
         let hostingController = NSHostingController(rootView: view)
 
         let window = NSWindow(contentViewController: hostingController)
-        window.title = "OpenTypeless"
+        window.title = "Best Waiting"
         window.styleMask = [.titled, .closable, .miniaturizable]
         window.setContentSize(NSSize(width: 560, height: 400))
         window.center()

@@ -377,7 +377,6 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 23D9ANGDZH;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = Sources/OpenTypeless/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -385,7 +384,7 @@
 					"@executable_path/../Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.scinttt.open-typeless";
-				PRODUCT_NAME = OpenTypeless;
+				PRODUCT_NAME = bestWaiting;
 				SDKROOT = macosx;
 			};
 			name = Debug;
@@ -478,7 +477,6 @@
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
-				DEVELOPMENT_TEAM = 23D9ANGDZH;
 				ENABLE_HARDENED_RUNTIME = YES;
 				INFOPLIST_FILE = Sources/OpenTypeless/Info.plist;
 				LD_RUNPATH_SEARCH_PATHS = (
@@ -486,7 +484,7 @@
 					"@executable_path/../Frameworks",
 				);
 				PRODUCT_BUNDLE_IDENTIFIER = "com.scinttt.open-typeless";
-				PRODUCT_NAME = OpenTypeless;
+				PRODUCT_NAME = bestWaiting;
 				SDKROOT = macosx;
 			};
 			name = Release;

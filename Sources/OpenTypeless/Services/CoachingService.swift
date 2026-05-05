@@ -205,11 +205,11 @@ actor CoachingLogWriter {
     private let fileURL: URL
     private static let logger = Logger(subsystem: "com.scinttt.open-typeless", category: "coaching")
 
-    // directory: override for testing; nil uses ~/Library/Application Support/OpenTypeless/
+    // directory: override for testing; nil uses ~/Library/Application Support/bestWaiting/
     init(directory: URL? = nil) {
         let dir = directory ?? FileManager.default
             .urls(for: .applicationSupportDirectory, in: .userDomainMask)[0]
-            .appendingPathComponent("OpenTypeless")
+            .appendingPathComponent("bestWaiting")
         do {
             try FileManager.default.createDirectory(at: dir, withIntermediateDirectories: true)
         } catch {
