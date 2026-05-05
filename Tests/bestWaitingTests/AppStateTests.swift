@@ -1,5 +1,5 @@
 import XCTest
-@testable import OpenTypeless
+@testable import bestWaiting
 
 @MainActor
 final class AppStateTests: XCTestCase {

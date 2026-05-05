@@ -18,9 +18,9 @@
 	<string>1.0</string>
 	<key>CFBundleVersion</key>
 	<string>1</string>
-	<key>NSMicrophoneUsageDescription</key>
-	<string>OpenTypeless needs microphone access to record your voice for speech-to-text transcription.</string>
 	<key>LSUIElement</key>
 	<true/>
+	<key>NSMicrophoneUsageDescription</key>
+	<string>bestWaiting needs microphone access to record your voice for speech-to-text transcription.</string>
 </dict>
 </plist>

@@ -3,7 +3,7 @@ import AVFoundation
 import SwiftUI
 
 @main
-struct OpenTypelessApp: App {
+struct bestWaitingApp: App {
     @NSApplicationDelegateAdaptor(AppDelegate.self) var appDelegate
 
     var body: some Scene {
@@ -87,23 +87,23 @@ final class AppDelegate: NSObject, NSApplicationDelegate, ObservableObject {
     private func startHotkeyWithAccessibilityPolling() {
         let options = [kAXTrustedCheckOptionPrompt.takeUnretainedValue(): true] as CFDictionary
         let trusted = AXIsProcessTrustedWithOptions(options)
-        print("[OpenTypeless] Accessibility trusted: \(trusted)")
+        print("[bestWaiting] Accessibility trusted: \(trusted)")
 
         if trusted {
             if hotkeyManager.start() {
-                print("[OpenTypeless] Hotkey manager started successfully")
+                print("[bestWaiting] Hotkey manager started successfully")
                 accessibilityTimer?.invalidate()
                 return
             }
         }
 
-        print("[OpenTypeless] Waiting for Accessibility permission...")
+        print("[bestWaiting] Waiting for Accessibility permission...")
         accessibilityTimer = Timer.scheduledTimer(withTimeInterval: 2.0, repeats: true) { [weak self] _ in
             Task { @MainActor in
                 guard let self = self else { return }
                 if AXIsProcessTrusted() {
                     if self.hotkeyManager.start() {
-                        print("[OpenTypeless] Hotkey manager started successfully (after permission grant)")
+                        print("[bestWaiting] Hotkey manager started successfully (after permission grant)")
                         self.accessibilityTimer?.invalidate()
                         self.accessibilityTimer = nil
                     }

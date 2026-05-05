@@ -1,6 +1,6 @@
 import CoreGraphics
 import XCTest
-@testable import OpenTypeless
+@testable import bestWaiting
 
 final class HotkeyStoreTests: XCTestCase {
     override func setUp() {

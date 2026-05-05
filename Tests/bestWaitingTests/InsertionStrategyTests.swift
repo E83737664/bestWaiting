@@ -1,5 +1,5 @@
 import XCTest
-@testable import OpenTypeless
+@testable import bestWaiting
 
 final class OutputTargetSnapshotTests: XCTestCase {
     func testSnapshotWithNoFocusedElement() {
