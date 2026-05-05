@@ -2,6 +2,8 @@
 
 [中文](README.md) | [English](README_EN.md)
 
+**Best Waiting 是一个 macOS 语音转文字助手，同时帮助你在等待 AI 回复的间隙锻炼英语口语。**
+
 ## 为什么用英文操作 Claude
 
 Anthropic CEO Dario Amodei 一贯主张 AI 安全与透明，但没有人真正知道 Claude 对不同语言的内容是否存在差异对待。在这种不确定性下，用英文和 Claude 交互，至少是一个更不容易出错的选择。
