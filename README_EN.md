@@ -2,17 +2,13 @@
 
 [中文](README.md) | [English](README_EN.md)
 
-## Two Problems, One Solution
+## Why Use English with Claude
 
-**Problem 1: English prompts get better results from Claude, but spoken English is hard to keep up with.**
+Anthropic CEO Dario Amodei has consistently advocated for AI safety and transparency — but nobody actually knows whether Claude treats different languages differently under the hood. Given that uncertainty, using English with Claude is at least the safer bet.
 
-Claude's training data is predominantly English, which directly affects output quality across languages. For the same question, an English prompt consistently produces more precise reasoning, more complete details, and sharper phrasing compared to Chinese. This is a consistent observation from long-term users, not just perception. Many people have started deliberately switching to English when working with Claude — but a new problem appears: their spoken English isn't fluent enough to keep up. The intent is there; the expression isn't.
+So many people deliberately switch to English. But then their spoken English can't keep up: the thought is there, the expression isn't, and it slows everything down. And on top of that, once you send a prompt, you wait — 10 seconds, 30 seconds, sometimes longer. Too short to start something new, too long to do nothing.
 
-**Problem 2: The waiting time has no good use.**
-
-When working with Claude, waiting is constant. You send a prompt, then wait — 10 seconds, 30 seconds, sometimes longer. Too short to open something new, too long to just do nothing.
-
-**Best Waiting** turns both problems into one solution: practice speaking English during the wait.
+**Best Waiting** answers both at once: practice speaking English during the wait.
 
 ## The Solution
 
@@ -130,7 +126,7 @@ The hotkey can be customized in Settings → Hotkeys tab.
 
 ## Pricing
 
-Transcription uses a local Whisper model. Ghost Coach analysis uses a Kimi account. Both are completely free.
+Transcription runs on a local Whisper model — no API key, completely free. Ghost Coach analysis uses Kimi's `kimi-for-coding` model, which requires a [Kimi](https://kimi.moonshot.cn/) account and is billed at Kimi's standard rates.
 
 ## License
 
