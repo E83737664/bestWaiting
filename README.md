@@ -1,112 +1,133 @@
-# open-typeless-formac
+# Best Waiting
 
-[English](README.md) | [中文](README_CN.md)
+[中文](README.md) | [English](README_EN.md)
 
-An open-source macOS menu bar app for speech-to-text. Press a hotkey to start recording, press again to stop — your speech is transcribed and automatically inserted into the active text field.
+## 为什么用英文操作 Claude
 
-Inspired by [Typeless](https://www.typeless.com/).
+Anthropic CEO Dario Amodei 一贯主张 AI 安全与透明，但没有人真正知道 Claude 对不同语言的内容是否存在差异对待。在这种不确定性下，用英文和 Claude 交互，至少是一个更不容易出错的选择。
 
-## Features
+于是很多人开始刻意切换到英文——但口语表达跟不上，想说的说不清楚，反而拖慢了节奏。更尴尬的是，发出 prompt 之后，还要等。10 秒、30 秒、有时候更长。这段时间太短，不值得打开另一件事，太长，又只是发呆。
 
-- **Toggle-to-talk**: Press hotkey to start, press again to stop (no need to hold)
-- **Auto-insert**: Transcribed text is pasted into the focused input field via Cmd+V
-- **Popup fallback**: If no text field is focused, a floating panel shows the result with a Copy button
-- **Progress overlay**: A bottom-center overlay shows recording/transcribing status with audio level
-- **Double-tap cancel**: Quickly press the hotkey twice to cancel recording
-- **Multiple models**: Choose between gpt-4o-mini-transcribe, gpt-4o-transcribe, or whisper-1
-- **Custom API endpoint**: Works with any OpenAI-compatible API (Groq, Together AI, etc.)
-- **Chinese/English UI**: Switch UI language in Settings
+**Best Waiting** 的答案：在等待的时候练英文口语。
 
-## Quick Start
+## 解决方案
 
-### 1. Build & Run
+按下快捷键，用英语说出你的想法——可以是刚才发给 Claude 的问题、你对这个任务的思考、随便一段话。说完再按一下，语音通过本地 Whisper 模型转写完成，文字插入到当前输入框。
 
-1. Download **Xcode** from the [App Store](https://apps.apple.com/app/xcode/id497799835)
-2. Clone this repo:
+与此同时，**Ghost Coach** 在后台悄悄记录你说的每一句话，分析是否有中式英语、搭配错误、不自然的表达，并把结果写入日志。
+
+你继续等 Claude。Ghost Coach 悄悄替你积累语料。
+
+## Ghost Coach
+
+每次你用语音输入，Ghost Coach 会做两件事：
+
+**第一步：记录。** 将你说的每句话追加写入：
+
+```
+~/Library/Application Support/bestWaiting/coaching.jsonl
+```
+
+**第二步：分析。** 调用语言模型判断这句话是否有问题，标记以下四类：
+
+| 类别 | 说明 | 例子 |
+|------|------|------|
+| `chinglish` | 中式直译 | "give a suggestion" → "make a suggestion" |
+| `collocation` | 搭配错误 | "make a research" → "do research" |
+| `hedge` | 模糊语气词堆叠 | "I think maybe perhaps we could possibly..." |
+| `word_choice` | 有更自然的说法 | 换用更地道的词汇 |
+
+轻微语法错误（缺冠词、时态问题）不会被标记。只标记高置信度的问题。
+
+### 日志格式
+
+```json
+{
+  "v": 1,
+  "ts": "2026-05-05T09:32:27Z",
+  "original": "I want to give a suggestion about this approach",
+  "issue": "'Give a suggestion' 是中式直译，英文习惯用 'make a suggestion' 或直接用 'suggest'",
+  "suggestion": "I want to make a suggestion about this approach",
+  "category": "chinglish",
+  "session_app": "Claude"
+}
+```
+
+### 查看日志
+
+```bash
+# 查看所有记录
+cat ~/Library/Application\ Support/bestWaiting/coaching.jsonl | python3 -c \
+  'import sys,json; [print(json.dumps(json.loads(l), indent=2, ensure_ascii=False)) for l in sys.stdin]'
+
+# 最常出现的错误类别
+cat ~/Library/Application\ Support/bestWaiting/coaching.jsonl \
+  | python3 -c 'import sys,json; [print(json.loads(l).get("category","null")) for l in sys.stdin if l.strip()]' \
+  | sort | uniq -c | sort -rn | head -5
+```
+
+少于 5 个单词、非英文内容、10 秒内连续重复的录音会被自动跳过。
+
+## 快速开始
+
+### 1. 编译运行
+
+1. 从 [App Store](https://apps.apple.com/app/xcode/id497799835) 下载 **Xcode**
+2. 克隆仓库：
    ```bash
-   git clone https://github.com/scinttt/open-typeless-formac.git
+   git clone https://github.com/E83737664/bestWaiting.git
    ```
-3. Open `OpenTypeless.xcodeproj` in Xcode
-4. Set up signing: Select the `OpenTypeless` target → **Signing & Capabilities** → Check **"Automatically manage signing"** → Select your **Personal Team** → Set Signing Certificate to **"Sign to Run Locally"**
-   > This keeps your Accessibility permission across rebuilds and avoids microphone permission issues. No paid Apple Developer account needed — a free Apple ID works.
-5. Press **Cmd+R** to build and run
+3. 用 Xcode 打开 `bestWaiting.xcodeproj`
+4. 设置签名：选择 `bestWaiting` target → **Signing & Capabilities** → 勾选 **"Automatically manage signing"** → 选择你的 **Personal Team** → Signing Certificate 选择 **"Sign to Run Locally"**
+5. 按 **Cmd+R** 编译运行
 
-### 2. Find the App
+编译完成后，在屏幕右上角菜单栏找到麦克风图标（🎙）。
 
-After build & run, look for the **microphone icon (🎙) in the top-right menu bar** — that's open-typeless. Click it to access Settings.
+### 2. 授权权限
 
-### 3. Grant Permissions
+首次启动时授权：
+- **麦克风** — 录音
+- **辅助功能** — 全局快捷键和文字插入
 
-On first launch, you'll be prompted to grant:
-- **Microphone** — for recording your voice
-- **Accessibility** — for the global hotkey and text insertion
+### 3. 启动本地语音转写
 
-> If you set up signing in step 1, Accessibility permission persists across rebuilds. Otherwise, after each build you need to re-grant: go to System Settings > Privacy & Security > Accessibility, remove the old entry with the minus (-) button, then click "Grant Access" in the app to re-add it.
+语音转写使用本地运行的 [OpenAI Whisper](https://github.com/openai/whisper) 模型，完全离线，无需 API key。
 
-### 4. Configure API Key
+```bash
+# 安装依赖
+pip install openai-whisper
 
-Click the menu bar icon → **Settings** → go to the **API** tab:
-- **Provider**: Choose "OpenAI" or "Custom" (for OpenAI-compatible endpoints)
-- **API Key**: Enter your OpenAI API key (`sk-...`)
-- **Model**: Choose a transcription model (default: `gpt-4o-mini-transcribe`)
+# 启动本地转写服务（保持终端运行）
+python3 whisper_server.py
+```
 
-You can get an OpenAI API key at [platform.openai.com/api-keys](https://platform.openai.com/api-keys).
+首次运行会自动下载 Whisper `base` 模型（约 140MB）。下载完成后服务在本地 `http://localhost:5001` 运行，应用启动后会自动连接。
 
-### 5. Start Using
+### 4. 配置 Ghost Coach
 
-> **⚠️ Default Hotkey: Right Option (Alt) key**
->
-> This is the key to the left of the arrow keys on most keyboards.
+Ghost Coach 使用 [Kimi](https://kimi.moonshot.cn/) 做分析：
 
-| Action | How |
-|--------|-----|
-| **Start recording** | Press **Right Option (Alt)** |
-| **Stop & transcribe** | Press **Right Option (Alt)** again |
-| **Cancel recording** | Double-press **Right Option (Alt)** quickly |
+```bash
+pip install kimi-cli
+kimi login
+```
 
-The transcribed text will be automatically inserted into whatever text field your cursor is in. If no text field is focused, a popup appears with a Copy button.
+登录后凭证自动保存，无需其他配置。
 
-> The hotkey can be customized in Settings → Hotkeys tab. Click "Click to record" then press your desired key or key combo.
+### 5. 使用
 
-## Pricing Estimate
+| 操作 | 快捷键 |
+|------|--------|
+| 开始录音 | 右 Option（Alt）键 |
+| 停止并转写 | 再按一次右 Option（Alt）键 |
+| 取消录音 | 快速按两下右 Option（Alt）键 |
 
-open-typeless uses the `gpt-4o-mini-transcribe` model by default.
+快捷键可在设置 → 快捷键标签页中自定义。
 
-| Usage | Cost (USD) | Cost (CNY) |
-|-------|-----------|------------|
-| 1 minute (~150 words) | $0.003 | ~0.02 |
-| 10 minutes | $0.03 | ~0.2 |
-| 1 hour | $0.18 | ~1.3 |
-| Daily use (30 min/day, 1 month) | ~$2.70 | ~20 |
+## 费用
 
-> For comparison: Typeless costs $144/year. With open-typeless, even heavy daily use costs under $3/month.
+语音转写使用本地 Whisper 模型，无需 API key，完全免费。Ghost Coach 分析使用 Kimi 的 `kimi-for-coding` 模型，需要 [Kimi](https://kimi.moonshot.cn/) 账号，按 Kimi 的定价计费。
 
-| Model | Cost/min | Accuracy |
-|-------|----------|----------|
-| gpt-4o-mini-transcribe | $0.003 | Great (default) |
-| gpt-4o-transcribe | $0.006 | Best |
-| whisper-1 | $0.006 | Good |
-
-## Tech Stack
-
-| Layer | Technology |
-|-------|-----------|
-| App | Swift + SwiftUI + AppKit (MenuBarExtra + NSWindow) |
-| Audio | AVAudioRecorder (M4A, 44.1kHz mono) |
-| Transcription | [MacPaw/OpenAI](https://github.com/MacPaw/OpenAI) Swift SDK |
-| Text insertion | Clipboard + simulated Cmd+V |
-| Hotkeys | CGEvent tap (toggle mode, modifier-only key support) |
-
-## Troubleshooting
-
-| Problem | Solution |
-|---------|----------|
-| Hotkey doesn't work | Check Accessibility permission; remove old entry and re-add in System Settings |
-| "API key not configured" | Enter your key in Settings → API tab |
-| No audio input | Check System Settings > Sound > Input; make sure a microphone is selected |
-| Text not inserting | Click into a text field before stopping the recording |
-| Can't find the app | Look for the microphone icon in the top-right menu bar |
-
-## License
+## 许可证
 
 MIT
