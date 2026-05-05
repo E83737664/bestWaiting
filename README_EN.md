@@ -2,6 +2,8 @@
 
 [中文](README.md) | [English](README_EN.md)
 
+**Best Waiting is a macOS speech-to-text assistant that also helps you practice spoken English during the gaps between AI responses.**
+
 ## Why Use English with Claude
 
 Anthropic CEO Dario Amodei has consistently advocated for AI safety and transparency — but nobody actually knows whether Claude treats different languages differently under the hood. Given that uncertainty, using English with Claude is at least the safer bet.
