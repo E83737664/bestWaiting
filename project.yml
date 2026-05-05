@@ -31,7 +31,7 @@ targets:
         NSMicrophoneUsageDescription: "bestWaiting needs microphone access to record your voice for speech-to-text transcription."
         LSUIElement: true
     entitlements:
-      path: Sources/OpenTypeless/OpenTypeless.entitlements
+      path: Sources/OpenTypeless/bestWaiting.entitlements
       properties:
         com.apple.security.app-sandbox: false
     settings:

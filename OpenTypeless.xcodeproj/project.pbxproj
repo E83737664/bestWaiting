@@ -77,8 +77,8 @@
 		A881C9C9969769256760954D /* MainWindowController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindowController.swift; sourceTree = "<group>"; };
 		ABF05C3D3B209C89B1E47474 /* MainWindowView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MainWindowView.swift; sourceTree = "<group>"; };
 		B1AA585D61E899DA7395C152 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
-		BCB897F4D7250E5F5717D2FE /* OpenTypeless.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = OpenTypeless.entitlements; sourceTree = "<group>"; };
 		BCC095ED5BE2645B195A6F3A /* ProgressOverlay.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProgressOverlay.swift; sourceTree = "<group>"; };
+		BD3E112E91E8B9378EF944F1 /* bestWaiting.entitlements */ = {isa = PBXFileReference; lastKnownFileType = text.plist.entitlements; path = bestWaiting.entitlements; sourceTree = "<group>"; };
 		D7DB340E5942201AEF2DC10E /* HotkeyStoreTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HotkeyStoreTests.swift; sourceTree = "<group>"; };
 		EBD0C80A27D2503CDA5D39ED /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
 		F4654661C7B93FFF0EDBBE79 /* ResultPopup.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultPopup.swift; sourceTree = "<group>"; };
@@ -127,8 +127,8 @@
 		5CA13D3C010E08A296D90B60 /* OpenTypeless */ = {
 			isa = PBXGroup;
 			children = (
+				BD3E112E91E8B9378EF944F1 /* bestWaiting.entitlements */,
 				EBD0C80A27D2503CDA5D39ED /* Info.plist */,
-				BCB897F4D7250E5F5717D2FE /* OpenTypeless.entitlements */,
 				D6A81BEE9C72282895CE9576 /* App */,
 				2DC10389B430C314CAEBF495 /* Audio */,
 				DE2305D1EB582F16DED7F848 /* Core */,
@@ -373,7 +373,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = Sources/OpenTypeless/OpenTypeless.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Sources/OpenTypeless/bestWaiting.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
@@ -473,7 +473,7 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
-				CODE_SIGN_ENTITLEMENTS = Sources/OpenTypeless/OpenTypeless.entitlements;
+				CODE_SIGN_ENTITLEMENTS = Sources/OpenTypeless/bestWaiting.entitlements;
 				CODE_SIGN_IDENTITY = "Apple Development";
 				CODE_SIGN_STYLE = Automatic;
 				COMBINE_HIDPI_IMAGES = YES;
