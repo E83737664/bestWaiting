@@ -16,6 +16,7 @@ Inspired by [Typeless](https://www.typeless.com/).
 - **Multiple models**: Choose between gpt-4o-mini-transcribe, gpt-4o-transcribe, or whisper-1
 - **Custom API endpoint**: Works with any OpenAI-compatible API (Groq, Together AI, etc.)
 - **Chinese/English UI**: Switch UI language in Settings
+- **Ghost Coach**: Automatically logs spoken English utterances and analyzes them for Chinglish patterns, collocation errors, and unnatural phrasing using a language model
 
 ## Quick Start
 
@@ -68,6 +69,55 @@ The transcribed text will be automatically inserted into whatever text field you
 
 > The hotkey can be customized in Settings → Hotkeys tab. Click "Click to record" then press your desired key or key combo.
 
+## Ghost Coach
+
+Ghost Coach is a background English fluency coach for non-native speakers. Every time you dictate, it:
+
+1. **Logs your spoken English** — each utterance is appended to `~/Library/Application Support/OpenTypeless/coaching.jsonl` with a timestamp, the original text, and the detected issue.
+2. **Analyzes for natural-English issues** — sends the utterance to a language model that flags Chinglish calques, collocation errors (wrong preposition or verb-noun pairing), hedge overuse, and unnatural word choice. Minor grammar mistakes are intentionally ignored.
+
+The log file format:
+
+```json
+{
+  "v": 1,
+  "ts": "2026-05-05T09:32:27Z",
+  "original": "I want to give a suggestion about this approach",
+  "issue": "'Give a suggestion' is a direct calque; English uses 'make a suggestion' or 'suggest'",
+  "suggestion": "I want to make a suggestion about this approach",
+  "category": "chinglish",
+  "session_app": "Slack"
+}
+```
+
+Categories: `chinglish` · `collocation` · `hedge` · `word_choice`
+
+### Setup
+
+Ghost Coach requires a [Kimi](https://kimi.moonshot.cn/) account with the Kimi CLI installed:
+
+```bash
+pip install kimi-cli
+kimi login
+```
+
+Credentials are read automatically from `~/.kimi/credentials/kimi-code.json`. No additional configuration needed.
+
+### Viewing your coaching log
+
+```bash
+# All entries
+cat ~/Library/Application\ Support/OpenTypeless/coaching.jsonl | python3 -c \
+  'import sys,json; [print(json.dumps(json.loads(l), indent=2, ensure_ascii=False)) for l in sys.stdin]'
+
+# Top recurring error categories
+cat ~/Library/Application\ Support/OpenTypeless/coaching.jsonl \
+  | python3 -c 'import sys,json; [print(json.loads(l).get("category","null")) for l in sys.stdin if l.strip()]' \
+  | sort | uniq -c | sort -rn | head -5
+```
+
+Utterances shorter than 5 words, non-English text, and rapid repeated dictations (within 10 seconds) are skipped automatically.
+
 ## Pricing Estimate
 
 open-typeless uses the `gpt-4o-mini-transcribe` model by default.
@@ -93,9 +143,10 @@ open-typeless uses the `gpt-4o-mini-transcribe` model by default.
 |-------|-----------|
 | App | Swift + SwiftUI + AppKit (MenuBarExtra + NSWindow) |
 | Audio | AVAudioRecorder (M4A, 44.1kHz mono) |
-| Transcription | [MacPaw/OpenAI](https://github.com/MacPaw/OpenAI) Swift SDK |
+| Transcription | [MacPaw/OpenAI](https://github.com/MacPaw/OpenAI) Swift SDK · local Whisper (Python subprocess) |
 | Text insertion | Clipboard + simulated Cmd+V |
 | Hotkeys | CGEvent tap (toggle mode, modifier-only key support) |
+| Ghost Coach | Kimi `kimi-for-coding` model · URLSession + JWT OAuth auto-refresh · JSONL log |
 
 ## Troubleshooting
 
